@@ -307,3 +307,44 @@ const empty = [[0,0,0,0],
                [0,0,0,0],
                [0,0,0,0]]
 ```
+
+### Calling back
+
+The only thing that is needed to have an actual playable game is to add some callbacks for the keyevents that will change our state.
+We can subscribe our event listeners when the component was mounted and remove them when the component is about to get removed. For these we can use the component lifecycle callbacks of the `Game` component:
+
+```jsx
+componentDidMount() {
+  window.addEventListener('keydown', this.handleKeyDown)
+}
+componentWillUnMount() {
+  window.removeEventListener('keydown', this.handleKeyDown)
+}
+```
+And we need to provide something that will handle these events. In the snippet above I use the `handleKeyDown` method of the class. In it we just need to check what key was typed and call the corresponding method of the board object. And of course set the state of the component. To do that we need to use the `this.setState()` method where we can pass the modified parts of our state. Since the only thing in our state object is a `board` with a 4x4 array as a value we will pass the whole. But you don't need to do that in an other example passing the changed keys with the new values is enough.
+
+```jsx
+handleKeyDown = (event) => {
+  switch (event.keyCode) {
+    case 37:
+      board.left();
+      break;
+    case 38:
+      board.up();
+      break;
+    case 39:
+      board.right();
+      break;
+    case 40:
+      board.down();
+      break;
+    default:
+  }
+  this.setState({board: board.getCells()})
+}
+```
+
+Note that I created this method with the `arrow` function because we will need the component as a `this` in order to update the state.
+
+If you've got this far your game is perfectly functioning and playable.
+The only thing that remains is to help the user understanding what is happening when hitting a key. Without animations it's really a hard task to recognize the state changes of the tiles.

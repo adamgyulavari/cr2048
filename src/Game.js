@@ -18,6 +18,30 @@ class Game extends Component {
       board: board.getCells()
     }
   }
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown)
+  }
+  componentWillUnMount() {
+    window.removeEventListener('keydown', this.handleKeyDown)
+  }
+  handleKeyDown = (event) => {
+    switch (event.keyCode) {
+      case 37:
+        board.left();
+        break;
+      case 38:
+        board.up();
+        break;
+      case 39:
+        board.right();
+        break;
+      case 40:
+        board.down();
+        break;
+      default:
+    }
+    this.setState({board: board.getCells()})
+  }
   render() {
     return (
       <div className="board">
