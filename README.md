@@ -225,3 +225,46 @@ Here's what I used:
   font-size: 55px;
 }
 ```
+
+### The Game Logic
+
+You can try out that if the initial board is different, the actual tiles will be different. So what we actually need now is to handle the logic of the game. The workshop was held at a JSConf, so I didn't want to bother the audience with coding in plain javascript, so we created a headless implementation and pushed it to an [npm package](https://www.npmjs.com/package/cr-2048) that actually handles that for us. If you want, you can still do it, just create the same interface (what we use below), so you can use your own solution.
+
+So just add it to the package json:
+```json
+"dependencies": {
+  "react": "^15.6.1",
+  "react-dom": "^15.6.1",
+  "cr-2048": "^1.0.2"
+}
+```
+Then `npm install` or `yarn install`.
+
+This will provide us the board object exactly how we used it, and we can call `up()` or `down` etc methods that will do the magic and we'll just get the new state from it.
+
+Initialize the `Board` object at the top of the `Game` component as a constant and instead of initializing with the empty board object we can have it like this:
+
+```jsx
+...
+import Board from 'cr-2048/src/Board.js'
+
+const board = Board()
+
+class Game extends Component {
+  constructor() {
+    super()
+    this.state = {
+      board: board.getCells()
+    }
+  }
+  ...
+```
+
+Don't remove the empty board 4x4 array just yet, we'll use it later, place it as a constant at the top:
+
+```jsx
+const empty = [[0,0,0,0],
+               [0,0,0,0],
+               [0,0,0,0],
+               [0,0,0,0]]
+```

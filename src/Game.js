@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 
 import './Game.css'
 
+import Board from 'cr-2048/src/Board.js'
+
+const board = Board()
+const empty = [[0,0,0,0],
+               [0,0,0,0],
+               [0,0,0,0],
+               [0,0,0,0]]
+
 class Game extends Component {
   constructor() {
     super()
     this.state = {
-      board: [[0,0,0,0],
-              [0,0,0,0],
-              [0,0,0,0],
-              [0,0,0,0]]
+      board: board.getCells()
     }
   }
   getPositionStyle(x, y) {
