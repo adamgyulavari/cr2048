@@ -23,7 +23,7 @@ class Game extends Component {
       <div className="board">
         {
           this.state.board.map((row, x) => (
-            row.map((tile, y) => <p style={this.getPositionStyle(x, y)}>{`[${x}][${y}]:${tile}`}</p>)
+            row.map((tile, y) => <p style={this.getPositionStyle(x, y)} className="tile">{tile}</p>)
           ))
         }
       </div>

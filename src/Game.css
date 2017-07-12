@@ -7,9 +7,14 @@
   border: 10px solid #bbada0;
 }
 
-.board p {
+.tile {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  line-height: 80px;
   position: absolute;
-  width: 100px;
-  height: 100px;
-  margin: 0;
+  border-radius: 3px;
+  color: #766;
+  background-color: #dcb;
+  font-size: 55px;
 }

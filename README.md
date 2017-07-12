@@ -186,8 +186,42 @@ Now create a `Game.css`
 }
 ```
 
-And add it to the `Game` component
+And import it in the `Game` component
 
 ```jsx
 import './Game.css'
+```
+
+Let's do some more styling so this actually looks like the 2048 board.
+- Add a css class to the paragraph indicating that is a tile
+- Add some background for the board and the tile class
+- Remove the positions from the content
+
+Here's what I used:
+
+```jsx
+<p style={this.getPositionStyle(x, y)} className="tile">{tile}</p>
+```
+
+```css
+.board {
+  width: 400px;
+  height: 400px;
+  background: #bbada0;
+  margin: 20px auto;
+  position: relative;
+  border: 10px solid #bbada0;
+}
+
+.tile {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  line-height: 80px;
+  position: absolute;
+  border-radius: 3px;
+  color: #766;
+  background-color: #dcb;
+  font-size: 55px;
+}
 ```
