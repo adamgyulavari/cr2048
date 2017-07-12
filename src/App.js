@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Game from './Game.js';
+import Game from './Game.js'
 
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
 
 class App extends Component {
   render() {
@@ -19,4 +19,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
