@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './Game.css'
+
 class Game extends Component {
   constructor() {
     super()
@@ -10,12 +12,18 @@ class Game extends Component {
               [0,0,0,0]]
     }
   }
+  getPositionStyle(x, y) {
+    return {
+      left: x*100,
+      top: y*100
+    }
+  }
   render() {
     return (
       <div className="board">
         {
           this.state.board.map((row, x) => (
-            row.map((tile, y) => <p>{`[${x}][${y}]:${tile}`}</p>)
+            row.map((tile, y) => <p style={this.getPositionStyle(x, y)}>{`[${x}][${y}]:${tile}`}</p>)
           ))
         }
       </div>

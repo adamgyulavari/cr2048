@@ -125,7 +125,7 @@ class Game extends Component {
 
 Note that this is the only place where we can set the state like this, and also nothing can happen before calling the `super()` parent class' constructor.
 
-Now let's do some rendering. In the `Game.js` render method just map through the `board` and display it with the indices in a paragraph element. Inside of `jsx` elements you can have simple javascript code using curly braces.
+Now let's do some rendering. In the `Game.js` render method just map through the `board` and display it with the indices in a paragraph element. Inside of `jsx` elements you can simply have any kind of javascript code using curly braces.
 
 ```jsx
 render() {
@@ -139,4 +139,55 @@ render() {
     </div>
   )
 }
+```
+
+Note that there are some differences compared to html, the css classes are assigned with the `className` attribute.
+
+### Boarding the board
+
+It really doesn't look like a board, does it?
+
+Let's change that!
+
+The simplest solution is to have the board positioning as relative and the paragraphs as absolute so we can dinamically pass the proper left and right values based on the indices. First create a method that returns the correct styling object based on the parameters:
+
+```jsx
+  ...
+}
+getPositionStyle(x, y) {
+  return {
+    left: x*100,
+    right: y*100
+  }
+}
+render() {
+  ...
+```
+
+Then use it in the render method as the style property of the paragraphs:
+
+```jsx
+<p style={this.getPositionStyle(x, y)}>{`[${x}][${y}]:${tile}`}</p>
+```
+
+Now create a `Game.css`
+
+```css
+.board {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.board p {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+```
+
+And add it to the `Game` component
+
+```jsx
+import './Game.css'
 ```
