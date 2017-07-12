@@ -74,7 +74,7 @@ class Game extends Component {
 export default Game
 ```
 
-The most important part of a component is the `render` method, which will actually produce the looks of it.
+The most important part of a component is the `render` method, which will actually produce the looks of it. Note that render must return only one node, inside of it you can have any number of them, but the return value should be only one.
 
 Now for trying out our new component, let's move the lower paragraph from the `App` to be rendered here (that's already in the snippet), and replace rendering it in the `App` with rendering the `Game` component.
 
@@ -124,3 +124,19 @@ class Game extends Component {
 ```
 
 Note that this is the only place where we can set the state like this, and also nothing can happen before calling the `super()` parent class' constructor.
+
+Now let's do some rendering. In the `Game.js` render method just map through the `board` and display it with the indices in a paragraph element. Inside of `jsx` elements you can have simple javascript code using curly braces.
+
+```jsx
+render() {
+  return (
+    <div className="board">
+      {
+        this.state.board.map((row, x) => (
+          row.map((tile, y) => <p>{`[${x}][${y}]:${tile}`}</p>)
+        ))
+      }
+    </div>
+  )
+}
+```
