@@ -56,4 +56,36 @@ Now you can modify for example the `App.js` and checkout the build pipeline in w
 
 ### Your first Component
 
-Let's create a new file where we will keep our main Game related stuff, so lets call it `Game.js`
+Let's create a new file where we will keep our main Game related stuff, so lets call it `Game.js`. At first just create a skeleton component:
+
+```jsx
+import { Component } from 'react';
+
+class Game extends Component {
+  render() {
+    return (
+      <p className="App-intro">
+        To get started, edit <code>src/App.js</code> and save to reload.
+      </p>
+    );
+  }
+}
+
+export default Game;
+```
+
+Now for trying out our new component, let's move the lower paragraph from the `App` to be rendered here (that's already in the snippet), and replace rendering it in the `App` with rendering the `Game` component.
+
+```jsx
+render() {
+  return (
+    <div className="App">
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2>React 2048 by Chain.Reaction</h2>
+      </div>
+      <Game />
+    </div>
+  );
+}
+```
