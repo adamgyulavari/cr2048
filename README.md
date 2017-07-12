@@ -59,7 +59,7 @@ Now you can modify for example the `App.js` and checkout the build pipeline in w
 Let's create a new file where we will keep our main Game related stuff, so lets call it `Game.js`. At first just create a skeleton component:
 
 ```jsx
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 class Game extends Component {
   render() {
@@ -89,3 +89,12 @@ render() {
   );
 }
 ```
+
+If you want to use another component somewhere don't forget to import it at the top of the file:
+
+```jsx
+import Game from './Game.js';
+```
+
+Now if everything went well you should be seeing the same in your browser, just using the two separate components in the background. The html structure should be the same, but you can check that actually the `Game` component is used now with [React Devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+![React devtools](assets/devtools.png)
