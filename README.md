@@ -149,7 +149,7 @@ It really doesn't look like a board, does it?
 
 Let's change that!
 
-The simplest solution is to have the board positioning as relative and the paragraphs as absolute so we can dinamically pass the proper left and right values based on the indices. First create a method that returns the correct styling object based on the parameters:
+The simplest solution is to have the board positioning as relative and the paragraphs as absolute so we can dynamically pass the proper left and right values based on the indices. First create a method that returns the correct styling object based on the parameters:
 
 ```jsx
   ...
@@ -192,6 +192,45 @@ And import it in the `Game` component
 import './Game.css'
 ```
 
+### Boarding the tile
+
+As you can see we're doing many things with that unfortunate paragraph, also it has a method that actually belongs to displaying only the specific paragraphs, so probably we're in the need of a new component.
+- Create the `Tile.js`
+- Create a skeleton component with a `render` method
+- Move the `getPositionStyle` method to this component
+- Import it in the `Game` component
+- Replace the paragraph element with rendering a `Tile`
+
+Now we need to pass some data to the `Tile`. We can simply add any property to the `<Tile />` component, which will be accessible in the Tile as `this.props`. React will rerender the component if the `props` are changed as well.
+
+```jsx
+...
+row.map((tile, y) => <Tile x={x} y={y} tile={tile}/>)
+...
+```
+
+```jsx
+import React, { Component } from 'react'
+
+class Tile extends Component {
+  getPositionStyle() {
+    return {
+      left: this.props.x*100,
+      top: this.props.y*100
+    }
+  }
+  render() {
+    return (
+      <p style={this.getPositionStyle()}>
+        {this.props.tile}
+      </p>
+    )
+  }
+}
+
+export default Tile
+```
+
 Let's do some more styling so this actually looks like the 2048 board.
 - Add a css class to the paragraph indicating that is a tile
 - Add some background for the board and the tile class
@@ -200,7 +239,7 @@ Let's do some more styling so this actually looks like the 2048 board.
 Here's what I used:
 
 ```jsx
-<p style={this.getPositionStyle(x, y)} className="tile">{tile}</p>
+<p style={this.getPositionStyle()} className="tile">
 ```
 
 ```css

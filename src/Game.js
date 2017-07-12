@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
-import './Game.css'
-
+import Tile from './Tile.js'
 import Board from 'cr-2048/src/Board.js'
+
+import './Game.css'
 
 const board = Board()
 const empty = [[0,0,0,0],
@@ -17,18 +18,12 @@ class Game extends Component {
       board: board.getCells()
     }
   }
-  getPositionStyle(x, y) {
-    return {
-      left: x*100,
-      top: y*100
-    }
-  }
   render() {
     return (
       <div className="board">
         {
           this.state.board.map((row, x) => (
-            row.map((tile, y) => <p style={this.getPositionStyle(x, y)} className="tile">{tile}</p>)
+            row.map((tile, y) => <Tile x={x} y={y} tile={tile}/>)
           ))
         }
       </div>
