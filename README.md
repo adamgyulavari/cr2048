@@ -59,7 +59,7 @@ Now you can modify for example the `App.js` and checkout the build pipeline in w
 Let's create a new file where we will keep our main Game related stuff, so lets call it `Game.js`. At first just create a skeleton component:
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class Game extends Component {
   render() {
@@ -67,12 +67,14 @@ class Game extends Component {
       <p className="App-intro">
         To get started, edit <code>src/App.js</code> and save to reload.
       </p>
-    );
+    )
   }
 }
 
-export default Game;
+export default Game
 ```
+
+The most important part of a component is the `render` method, which will actually produce the looks of it.
 
 Now for trying out our new component, let's move the lower paragraph from the `App` to be rendered here (that's already in the snippet), and replace rendering it in the `App` with rendering the `Game` component.
 
@@ -86,15 +88,39 @@ render() {
       </div>
       <Game />
     </div>
-  );
+  )
 }
 ```
 
 If you want to use another component somewhere don't forget to import it at the top of the file:
 
 ```jsx
-import Game from './Game.js';
+import Game from './Game.js'
 ```
 
 Now if everything went well you should be seeing the same in your browser, just using the two separate components in the background. The html structure should be the same, but you can check that actually the `Game` component is used now with [React Devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+
 ![React devtools](assets/devtools.png)
+
+### An empty board
+
+The game will have a 4x4 board containing tiles, so that's a good guess if imagine that this will be our game's state. The state is also an important part of the components, since if a component's state changes react will re-render the necessary parts of the component. This will be a regular javascript object with any number of keys or level of depth. In order to help react doing it's rerendering magic, you have to consider this object as immutable (most of the time react explicitly notifies you if you try to modify the state object, but have this in mind, not all the time)
+
+So let's initialize our game state with an empty board in the component's constructor:
+
+```jsx
+class Game extends Component {
+  constructor() {
+    super()
+    this.state = {
+      board: [[0,0,0,0],
+              [0,0,0,0],
+              [0,0,0,0],
+              [0,0,0,0]]
+    }
+  }
+  render() {
+    ...
+```
+
+Note that this is the only place where we can set the state like this, and also nothing can happen before calling the `super()` parent class' constructor.

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 
 class Game extends Component {
-  this.state = {
-    board: [[0,0,0,0],
-            [0,0,0,0],
-            [0,0,0,0],
-            [0,0,0,0]]
+  constructor() {
+    super()
+    this.state = {
+      board: [[0,0,0,0],
+              [0,0,0,0],
+              [0,0,0,0],
+              [0,0,0,0]]
+    }
   }
   render() {
     return (
