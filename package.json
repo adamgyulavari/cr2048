@@ -5,15 +5,20 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "cr-2048": "^1.0.2"
+    "cr-2048": "^1.0.3"
   },
   "devDependencies": {
-    "react-scripts": "1.0.10"
+    "babel-loader": "^7.1.1",
+    "react-scripts": "1.0.10",
+    "webpack": "^3.2.0"
   },
+  "homepage" : "http://lab-coop.github.io/cr2048",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 import Tile from './Tile.js'
-import Board from 'cr-2048/src/Board.js'
+import Board from './Board.js'
+
 
 import './Game.css'
 
@@ -10,6 +11,7 @@ const empty = [[0,0,0,0],
                [0,0,0,0],
                [0,0,0,0],
                [0,0,0,0]]
+
 
 class Game extends Component {
   constructor() {
