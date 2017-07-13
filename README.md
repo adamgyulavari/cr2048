@@ -437,7 +437,7 @@ Don't forget to pass the position as a single object to the `Tile` component whe
       key={`${x}-${y}`}/>
 ```
 
-Note that double curly braces are needed here. The first one implicates the javascript context and the second on is the beginning and closing of an object.
+Note that double curly braces are needed here. The first one implicates the javascript context and the second one is the beginning and closing of an object.
 
 ### Transfromers III
 
