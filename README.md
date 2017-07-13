@@ -450,3 +450,23 @@ What's left is to get the transformations and use it in the passed position valu
   transition-timing-function: ease-in-out;
 }
 ```
+
+We will assign this class to the tile's paragraph when it's need to be moved. Probably we will pass the `moving` information as a property. At this point we'll use at least 3 values of the props in the `Tile`'s render method so it's best if extract them.
+
+```jsx
+render() {
+  const { position, tile, moving } = this.props
+  return (
+    <div>
+      <div
+        className="tile tile-empty"
+        style={this.getPositionStyle(this.state.originalPosition)} >
+      </div>
+      <p style={this.getPositionStyle(position)}
+         className={`tile tile-${tile} ${moving?'slide':''}`}>
+        {tile}
+      </p>
+    </div>
+  )
+}
+```

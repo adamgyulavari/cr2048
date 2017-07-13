@@ -14,15 +14,16 @@ class Tile extends Component {
     }
   }
   render() {
+    const { position, tile, moving } = this.props
     return (
       <div>
         <div
           className="tile tile-empty"
           style={this.getPositionStyle(this.state.originalPosition)} >
         </div>
-        <p style={this.getPositionStyle(this.props.position)}
-           className={`tile tile-${this.props.tile}`}>
-          {this.props.tile}
+        <p style={this.getPositionStyle(position)}
+           className={`tile tile-${tile} ${moving?'slide':''}`}>
+          {tile}
         </p>
       </div>
     )
