@@ -13,9 +13,10 @@ organizing the code and make it as smooth as possible.
 
 ![screenshot of the game](assets/game.png)
 
-[You can try it out here](https://labcoop.github.io/cr2048)
+[You can try it out here](https://lab-coop.github.io/cr2048)
 
 This writing covers the steps to follow the workshop's material. The workshop was three hours long.
+The `src` folder contains what we will do here.
 
 ## Getting started
 
@@ -630,3 +631,4 @@ Last thing we need to add some more styles ensuring the maximum resemblance to t
 ```
 
 And of course creating a winning scene and a losing scene. But I'll leave you for that. I hope you enjoyed this tutorial and learned from it at least a little :)
+The commit history of follows this tutorial (more or less), so you're able to checkout the overall structure anytime.
