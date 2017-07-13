@@ -553,3 +553,12 @@ isMoving(x, y) {
        || this.state.offsetsY[x][y] !== 0)
 }
 ```
+
+And use them when creating the `Tile`s.
+
+```jsx
+<Tile position={this.getPosition(x, y)}
+      tile={tile}
+      moving={this.isMoving(x, y)}
+      key={`${x}-${y}`}/>
+```
