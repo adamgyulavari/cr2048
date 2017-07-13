@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
 class Tile extends Component {
-  getPositionStyle() {
+  constructor(props) {
+    super()
+    this.state = {
+      originalPosition: props.position
+    }
+  }
+  getPositionStyle(position) {
     return {
-      left: this.props.x*100,
-      top: this.props.y*100
+      left: position.x*100,
+      top: position.y*100
     }
   }
   render() {
@@ -12,9 +18,10 @@ class Tile extends Component {
       <div>
         <div
           className="tile tile-empty"
-          style={this.getPositionStyle()} >
+          style={this.getPositionStyle(this.state.originalPosition)} >
         </div>
-        <p style={this.getPositionStyle()} className={`tile tile-${this.props.tile}`}>
+        <p style={this.getPositionStyle(this.props.position)}
+           className={`tile tile-${this.props.tile}`}>
           {this.props.tile}
         </p>
       </div>

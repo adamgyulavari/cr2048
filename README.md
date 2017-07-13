@@ -372,7 +372,7 @@ render() {
 }
 ```
 
-And the css part (I just moved the `background-color` property to the `tile-empty` class from the `tile`):
+And the css part (I just moved the `background-color` property to the `tile-empty` class from the `tile`). Also we can add a different background-color for the `tile-2` picked from the original game.
 
 ```css
 .tile {
@@ -393,4 +393,46 @@ And the css part (I just moved the `background-color` property to the `tile-empt
 .tile-0 {
   display: none;
 }
+
+.tile-2 {
+  background-color: #eee;
+}
 ```
+
+The empty tile will still be moved alongside with not empty one on top of it, since the position is calculated from the props, so let's store the original position in the state of the tile when creating one. In the constructor we can access the props as well and use them for initializing the component's state. And while we're there let's wrap the `x` and `y` into a `position` object.
+
+```jsx
+constructor(props) {
+  super()
+  this.state = {
+    originalPosition: props.position
+  }
+}
+getPositionStyle(position) {
+  return {
+    left: position.x*100,
+    top: position.y*100
+  }
+}
+```
+
+So we can separately call the styling method for the empty tile with the state's `this.state.originalPosition` and for the actual tile with `this.props.position`. This way the latter can be moved around while the first one stays where it should be.
+
+```jsx
+...
+<div
+  className="tile tile-empty"
+  style={this.getPositionStyle(this.state.originalPosition)} >
+</div>
+<p style={this.getPositionStyle(this.props.position)}
+   className={`tile tile-${this.props.tile}`}>
+...
+```
+
+Don't forget to pass the position as a single object to the `Tile` component when rendering the `Game`.
+
+```jsx
+<Tile position={{x: x, y: y}} tile={tile}/>
+```
+
+Note that double curly braces are needed here. The first one implicates the javascript context and the second on is the beginning and closing of an object.
