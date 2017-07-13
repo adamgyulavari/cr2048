@@ -11,7 +11,11 @@ focusing on creating the proper components,
 organizing the code and make it as smooth as possible.
 ```
 
-This writing covers the steps to follow the workshop's material.
+![screenshot of the game](assets/game.png)
+
+[You can try it out here](https://labcoop.github.io/cr2048)
+
+This writing covers the steps to follow the workshop's material. The workshop was three hours long.
 
 ## Getting started
 
