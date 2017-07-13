@@ -170,7 +170,7 @@ Then use it in the render method as the style property of the paragraphs:
 <p style={this.getPositionStyle(x, y)}>{`[${x}][${y}]:${tile}`}</p>
 ```
 
-Notice that we actually passed a simple javascript object as the `style` property with simple integer values. This will be converted into proper styling attributes the integers considered as pixel values. (Also you might notice that the x-y coordinates are mixed up how they should be used for left-top pixels. While having only 0-s to be displayed it doesn't really matter, later on it will be useful)
+Notice that we actually passed a simple javascript object as the `style` property with simple integer values. This will be converted into proper styling attributes the integers considered as pixel values. (Also you might notice that the x-y coordinates are mixed up how they should be used for left-top pixels. I did this on purpose. While having only 0-s to be displayed it doesn't really matter, later on this will be useful)
 
 Now create a `Game.css`
 
@@ -310,7 +310,7 @@ const empty = [[0,0,0,0],
                [0,0,0,0]]
 ```
 
-The board actually giving back the cells almost like this just with a little twist literally. Instead of giving us the rows, it gives us columns, so what we mixed up before comes in handy. But let's name the variables accurately.
+The board is actually giving back the cells almost like this just with a little twist literally. Instead of giving us the rows, it gives us columns, so what we mixed up before comes in handy (the `x` really should correspond with the `left` and `y` with `top`). But let's name the variables accurately.
 
 ```jsx
 this.state.board.map((column, x) => (
