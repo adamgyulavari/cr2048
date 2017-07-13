@@ -478,3 +478,78 @@ render() {
   )
 }
 ```
+
+In the `Game` component we need to get the offsets from the board and use them calculating the position what's passed to the `Tile`. But first we need to initialize the offsets as states, that's where the empty array comes handy.
+
+```jsx
+this.state = {
+  board: board.getCells(),
+  offsetsX: empty,
+  offsetsY: empty
+}
+```
+
+For up and down we will set the `offsetsY` and for left and right the `offsetsX`.
+
+```jsx
+left() {
+  board.left();
+  this.setState({offsetsX: board.getTransformation()});
+}
+up() {
+  board.up();
+  this.setState({offsetsY: board.getTransformation()});
+}
+down() {
+  board.down();
+  this.setState({offsetsY: board.getTransformation()});
+}
+right() {
+  board.right();
+  this.setState({offsetsX: board.getTransformation()});
+}
+```
+
+After 200ms the animations are finished so we can update the `board` of the `Game` and reset the offsets. And of course we can replace the calls for our methods instead of the boards'.
+
+```jsx
+handleKeyDown = (event) => {
+  switch (event.keyCode) {
+    case 37:
+      this.left()
+      break
+    case 38:
+      this.up()
+      break
+    case 39:
+      this.right()
+      break
+    case 40:
+      this.down()
+      break
+    default:
+  }
+  setTimeout(() => {
+    this.setState({
+      board: board.getCells(),
+      offsetsX: empty,
+      offsetsY: empty})
+    board.emptyTransformation()
+  }, 200)
+}
+```
+
+We have the offsets, we just need to add them to the positions what gets passed with the moving information. The `moving` information is basically a boolean which can be true if in the current position there is an offset. Let's create some methods for providing these complicated calculations.
+
+```jsx
+getPosition(x, y) {
+  return {
+    x: x + this.state.offsetsX[x][y],
+    y: y + this.state.offsetsY[x][y]
+  }
+}
+isMoving(x, y) {
+  return (this.state.offsetsX[x][y] !== 0
+       || this.state.offsetsY[x][y] !== 0)
+}
+```
