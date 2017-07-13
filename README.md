@@ -562,3 +562,67 @@ And use them when creating the `Tile`s.
       moving={this.isMoving(x, y)}
       key={`${x}-${y}`}/>
 ```
+
+Now hopefully you have a nicely animated board, where the tiles are going around just like they're supposed to.
+
+### Finishing up
+
+Last thing we need to add some more styles ensuring the maximum resemblance to the original.
+
+```jsx
+.tile-4 {
+  background-color: #eec;
+}
+
+.tile-8 {
+  color: #ffe;
+  background-color: #fb8;
+}
+
+.tile-16 {
+  color: #ffe;
+  background-color: #f96;
+}
+
+.tile-32 {
+  color: #ffe;
+  background-color: #f75;
+}
+
+.tile-64 {
+  color: #ffe;
+  background-color: #f53;
+}
+
+.tile-128 {
+  color: #ffe;
+  background-color: #ec7;
+  font-size: 45px;
+}
+
+.tile-256 {
+  color: #ffe;
+  background-color: #ec6;
+  font-size: 45px;
+}
+
+.tile-512 {
+  color: #ffe;
+  background-color: #ec5;
+  font-size: 45px;
+}
+
+.tile-1024 {
+  color: #fff;
+  background-color: #ec3;
+  font-size: 35px;
+}
+
+.tile-2048 {
+  color: #fff;
+  background-color: #ec2;
+  font-size: 35px;
+}
+```
+
+And of course creating a winning scene and a losing scene. But I'll leave you for that. I hope you enjoyed this tutorial and learned from it at least a little :)
