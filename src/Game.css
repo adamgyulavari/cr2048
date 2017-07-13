@@ -18,6 +18,12 @@
   color: #766;
 }
 
+.slide {
+  transition-property: left top;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
 .tile-empty {
   background-color: rgba(238,228,218,0.35);
 }

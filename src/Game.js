@@ -47,7 +47,9 @@ class Game extends Component {
       <div className="board">
         {
           this.state.board.map((row, x) => (
-            row.map((tile, y) => <Tile position={{x:x, y:y}} tile={tile}/>)
+            row.map((tile, y) => <Tile position={{x:x, y:y}}
+                                       tile={tile}
+                                       key={`${x}-${y}`}/>)
           ))
         }
       </div>

@@ -203,11 +203,11 @@ As you can see we're doing many things with that unfortunate paragraph, also it 
 - Import it in the `Game` component
 - Replace the paragraph element with rendering a `Tile`
 
-Now we need to pass some data to the `Tile`. We can simply add any property to the `<Tile />` component, which will be accessible in the Tile as `this.props`. React will rerender the component if the `props` are changed as well.
+Now we need to pass some data to the `Tile`. We can simply add any property to the `<Tile />` component, which will be accessible in the Tile as `this.props`. React will rerender the component if the `props` are changed as well. If you check the console probably you'll notice some warnings about something not having a `key`. When mapping through an array and creating a node for each element React's rendering will work better if all of them have a `key` (unique in the context) that will be converted to an id in the `html`.
 
 ```jsx
 ...
-row.map((tile, y) => <Tile x={x} y={y} tile={tile}/>)
+row.map((tile, y) => <Tile x={x} y={y} tile={tile} key={`${x}-${y}`}/>)
 ...
 ```
 
@@ -432,7 +432,21 @@ So we can separately call the styling method for the empty tile with the state's
 Don't forget to pass the position as a single object to the `Tile` component when rendering the `Game`.
 
 ```jsx
-<Tile position={{x: x, y: y}} tile={tile}/>
+<Tile position={{x:x, y:y}}
+      tile={tile}
+      key={`${x}-${y}`}/>
 ```
 
 Note that double curly braces are needed here. The first one implicates the javascript context and the second on is the beginning and closing of an object.
+
+### Transfromers III
+
+What's left is to get the transformations and use it in the passed position values, and also create the animation in css. The latter one is easier. We want to animate the `left` and the `top` property with some nice easing under a relatively short time.
+
+```css
+.slide {
+  transition-property: left top;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+```
