@@ -9,9 +9,15 @@ class Tile extends Component {
   }
   render() {
     return (
-      <p style={this.getPositionStyle()} className="tile">
-        {this.props.tile}
-      </p>
+      <div>
+        <div
+          className="tile tile-empty"
+          style={this.getPositionStyle()} >
+        </div>
+        <p style={this.getPositionStyle()} className={`tile tile-${this.props.tile}`}>
+          {this.props.tile}
+        </p>
+      </div>
     )
   }
 }

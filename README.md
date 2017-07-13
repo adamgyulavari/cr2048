@@ -104,7 +104,7 @@ Now if everything went well you should be seeing the same in your browser, just 
 
 ### An empty board
 
-The game will have a 4x4 board containing tiles, so that's a good guess if imagine that this will be our game's state. The state is also an important part of the components, since if a component's state changes react will re-render the necessary parts of the component. This will be a regular javascript object with any number of keys or level of depth. In order to help react doing it's rerendering magic, you have to consider this object as immutable (most of the time react explicitly notifies you if you try to modify the state object, but have this in mind, not all the time)
+The game will have a 4x4 board containing tiles, so a good guess is imagining that as our game's state. The `state` is also an important part of the components, since if a component's state changes react will re-render the necessary parts of the component. This will be a regular javascript object with any number of keys or level of depth. In order to help react doing it's rendering magic, you have to consider this object as immutable (most of the time react explicitly notifies you if you try to modify the state object, not all the time though)
 
 So let's initialize our game state with an empty board in the component's constructor:
 
@@ -123,7 +123,7 @@ class Game extends Component {
     ...
 ```
 
-Note that this is the only place where we can set the state like this, and also nothing can happen before calling the `super()` parent class' constructor.
+Note that this is the only place where we can set the state like this, and also nothing can happen before calling the `super()` (the parent class' constructor).
 
 Now let's do some rendering. In the `Game.js` render method just map through the `board` and display it with the indices in a paragraph element. Inside of `jsx` elements you can simply have any kind of javascript code using curly braces.
 
@@ -169,6 +169,8 @@ Then use it in the render method as the style property of the paragraphs:
 ```jsx
 <p style={this.getPositionStyle(x, y)}>{`[${x}][${y}]:${tile}`}</p>
 ```
+
+Notice that we actually passed a simple javascript object as the `style` property with simple integer values. This will be converted into proper styling attributes the integers considered as pixel values.
 
 Now create a `Game.css`
 
@@ -321,7 +323,7 @@ componentWillUnMount() {
   window.removeEventListener('keydown', this.handleKeyDown)
 }
 ```
-And we need to provide something that will handle these events. In the snippet above I use the `handleKeyDown` method of the class. In it we just need to check what key was typed and call the corresponding method of the board object. And of course set the state of the component. To do that we need to use the `this.setState()` method where we can pass the modified parts of our state. Since the only thing in our state object is a `board` with a 4x4 array as a value we will pass the whole. But you don't need to do that in an other example passing the changed keys with the new values is enough.
+And we need to provide something that will handle these events. In the snippet above I used the `handleKeyDown` method of the class. In it we just need to check what key was typed and call the corresponding method of the board object. And of course set the state of the component. To do that we need to use the `this.setState()` method where we can pass the modified parts of our state. Since the only thing in our state object is a `board` with a 4x4 array as a value we will rewrite the whole thing. But you don't need to do that in an other example passing the changed keys with the new values is enough.
 
 ```jsx
 handleKeyDown = (event) => {
@@ -338,7 +340,6 @@ handleKeyDown = (event) => {
     case 40:
       board.down();
       break;
-    default:
   }
   this.setState({board: board.getCells()})
 }
@@ -348,3 +349,48 @@ Note that I created this method with the `arrow` function because we will need t
 
 If you've got this far your game is perfectly functioning and playable.
 The only thing that remains is to help the user understanding what is happening when hitting a key. Without animations it's really a hard task to recognize the state changes of the tiles.
+
+### Animate that little tile
+
+At this point we'll need to check the [cr-2048 package](https://www.npmjs.com/package/cr-2048) for help since we're getting the state from the `Board` without any knowledge of what really happened in the background. Without that information we can't really animate anything. What we need is the movements of the tiles. Which tile went where. Luckily the `Board` has a method `getTransformation()` which will give us exactly that. When hitting a key the tiles will move only in one direction, so this transformation information will be just a simple 4x4 array with the offsets of the tiles that are moved. If we hit the `up` or `down` key the `y` coordinate will change with the offsets or if we hit the `left` or `right` key the `x` coordinate will change.
+
+The first problem that will occur if we move our tiles, that the original game had empty tiles and the filled ones moved on top of that. Now if we move one, just the board background will be behind it. So let's create the background empty tile. Also we don't acutally need the `0` values displayed, so we need to remove them. At some point different valued tiles will have different background and font sizes, so preparing for that the easiest way for removing the `0`-s is to have a `tile-{value}` class assigned to the paragraph. For this instance where the value is `0` it will contain a `display: none;`
+
+```jsx
+render() {
+  return (
+    <div>
+      <div
+        className="tile tile-empty"
+        style={this.getPositionStyle()} >
+      </div>
+      <p style={this.getPositionStyle()} className={`tile tile-${this.props.tile}`}>
+        {this.props.tile}
+      </p>
+    </div>
+  )
+}
+```
+
+And the css part (I just moved the `background-color` property to the `tile-empty` class from the `tile`):
+
+```css
+.tile {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  line-height: 80px;
+  position: absolute;
+  border-radius: 3px;
+  font-size: 55px;
+  color: #766;
+}
+
+.tile-empty {
+  background-color: rgba(238,228,218,0.35);
+}
+
+.tile-0 {
+  display: none;
+}
+```
